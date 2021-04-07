@@ -1,7 +1,7 @@
 Hi, over here you'll find code for various versions of the music beat box app, I've been building while learning java,
 using Midi music. 
 
-In order of creation (and complexitiy)
+In order of creation (and complexity)
 
 1) MusicTest1
 
