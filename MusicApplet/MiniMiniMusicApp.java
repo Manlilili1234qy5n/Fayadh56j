@@ -34,18 +34,22 @@ public class MiniMiniMusicApp {
 			e.setMessage(144, 2, 100, 110);// this message says, start playing note 44. 
 			MidiEvent noteOn = new MidiEvent(a, 1); 
 			MidiEvent noteOn1 = new MidiEvent(c, 31);
-			MidiEvent noteOn2 = new MidiEvent(e, 3);// adds moment in time, this says to trigger message a after first beat. 
+			MidiEvent noteOn2 = new MidiEvent(e, 3);// adds moment in time, this says to trigger message
+			// a after first beat. 
 			track.add(noteOn);
 			track.add(noteOn1);
 			track.add(noteOn2); 
-			track.add(noteOn); // track holds all the MidiEvent objects, start playing at NoteOn, stop at NoteOff. 
+			track.add(noteOn); //track holds all the MidiEvent objects, start playing at NoteOn, stop at NoteOff. 
 
-			/* More info on making a MiDi Message. To make one, make a ShortMessage instance, and invoke setMessage(), passing in the four arguments. 
+			/* More info on making a MiDi Message. To make one, make a ShortMessage instance, and invoke 
+			setMessage(), passing in the four arguments. 
 			What are the 4 arguments you ask? The first arg is the type; 144: means NoteOn, 126 means NoteOff. 
 			Next channel, note to play, velocity. 
-			Channel: Think of this as musician in a band, Channel 1 is muscican 1(keybaord), Channel 9 is the drummer etc... 
+			Channel: Think of this as musician in a band, Channel 1 is muscican 1(keybaord), Channel 9 
+			is the drummer etc... 
 			Note to Play: A number from 0-127 going from low to high notes. 
-			Velocity: How fast and Hard did you press the key. 0 is so soft you probably wont hear anything, 100 is a good default. */
+			Velocity: How fast and Hard did you press the key. 0 is so soft you probably wont hear anything, 
+			100 is a good default. */
 
 			ShortMessage b = new ShortMessage();
 			ShortMessage d = new ShortMessage();
