@@ -44,7 +44,7 @@ import javax.swing.*;
 		Graphics2D g2d = (Graphics2D) g; // cast it so it refers to a graphics2d object
 
 		GradientPaint gradient = new GradientPaint(70, 70, Color.blue, 150, 150, Color.orange);
-											// starting point, start color, ending point, ending color. 
+				// starting point, start color, ending point, ending color. 
 		g2d.setPaint(gradient);
 		g2d.fillOval(70, 70, 100, 100); //really means: fill oval with whatever is on the paintbrush (gradient)
 	}
