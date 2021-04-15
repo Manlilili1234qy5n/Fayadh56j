@@ -18,7 +18,8 @@ public class TwoButtons { //the main gui class doesnt implement actionlistener n
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JButton labelButton = new JButton("Change Label!");
-		labelButton.addActionListener(new LabelListener()); // instead of passing 'this', pass a new instance of approp. listener class.
+		labelButton.addActionListener(new LabelListener()); 
+		// instead of passing 'this', pass a new instance of approp. listener class.
 
 		JButton colorButton = new JButton("Change Color");
 		colorButton.addActionListener(new ColorListener());
@@ -37,7 +38,7 @@ public class TwoButtons { //the main gui class doesnt implement actionlistener n
 
 	class LabelListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			label.setText("Ouch!");							// Now we get to have two ActionListeners in a single CLASS!
+			label.setText("Ouch!");	// Now we get to have two ActionListeners in a single CLASS!
 		}
 	} //close inner class							
 
