@@ -36,7 +36,7 @@ public class SimpleAnimation {
 
 	class MyDrawPanel extends JPanel { // now an inner class
 		public void paintComponent(Graphics g) {
-			g.setColor(Color.white);
+			g.setColor(Color.white); //the fix!!! to the smearing problem mentioned below. 
 			g.fillRect(0,0,this.getWidth(), this.getHeight()); // methods inherited from jpanel
 
 			g.setColor(Color.red);
