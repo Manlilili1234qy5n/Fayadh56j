@@ -52,6 +52,8 @@ public class QuizCardPlayer {
     frame.setVisible(true);
   } // close go
 
+  // if this is a question, show the answeer otherwise show the next question
+  // set a flag for whether we're viewing a question or answer
   public class NextCardListener implements ActionListener {
     public void actionPerformed(ActionEvent ev) {
       if (isShowAnswer) {
@@ -70,10 +72,7 @@ public class QuizCardPlayer {
         }
       }
     }
-  }
-
-  // check the isAnswer booleanflag to see if they're currently viewing a question or an answer, and do 
-  // the appropriate thing, accordingly. 
+  } 
 
   public class OpenMenuListener implements ActionListener {
     public void actionPerformed(ActionEvent ev) {
@@ -84,6 +83,8 @@ public class QuizCardPlayer {
     }
   }
 
+  // must build an ArrayList of cards, by reading from a text file = called from the openmenulistener
+  // event handeler, reads lines one at a time, and tells makecard method to make a new card
   private void loadFile(File file) {
     cardList = new ArrayList<QuizCard>();
     try {
@@ -114,6 +115,8 @@ public class QuizCardPlayer {
     System.out.println("Make a Card");
   }
 
+  // called by the loadFile method, takes a line from the text file, and parses it into two pieces
+  // question and answer and created a new QuizCard , and adds it to the ArrayList called CardList
   private void showNextCard() {
     currentCard = cardList.get(currentCardIndex);
     currentCardIndex++;
