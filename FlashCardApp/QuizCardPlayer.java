@@ -52,7 +52,7 @@ public class QuizCardPlayer {
     frame.setVisible(true);
   } // close go
 
-  // if this is a question, show the answeer otherwise show the next question
+  // if this is a question, show the answer otherwise show the next question
   // set a flag for whether we're viewing a question or answer
   public class NextCardListener implements ActionListener {
     public void actionPerformed(ActionEvent ev) {
