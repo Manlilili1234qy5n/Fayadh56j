@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.sound.midi.*;
 import java.util.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class BeatBox {
 
@@ -54,6 +55,29 @@ public class BeatBox {
 		JButton downTempo = new JButton("Down Tempo");
 		downTempo.addActionListener(new MyDownTempoListener());
 		buttonBox.add(downTempo);
+
+		/*JButton saveFile = new JButton("Save");
+		saveFile.addActionListener(new MySendListener());
+		buttonBox.add(saveFile);*/
+
+		/*JButton loadFile = new JButton("Load");
+		loadFile.addActionListener(new MyReadInListener());
+		buttonBox.add(loadFile);*/
+
+		// loading file stuff
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("File");
+		JMenuItem loadMenuItem = new JMenuItem("Load Beat");
+		loadMenuItem.addActionListener(new OpenMenuListener());
+		fileMenu.add(loadMenuItem);
+		
+
+		//saving file stuff
+		JMenuItem saveMenuItem = new JMenuItem("Save Beat");
+		saveMenuItem.addActionListener(new SaveMenuListener());
+		fileMenu.add(saveMenuItem);
+		menuBar.add(fileMenu);
+		theFrame.setJMenuBar(menuBar);
 
 		Box nameBox = new Box(BoxLayout.Y_AXIS);
 		for (int i = 0; i < 16; i++) {
@@ -193,5 +217,69 @@ public class BeatBox {
 			event = new MidiEvent(a, tick);
 		} catch (Exception e) {e.printStackTrace();}
 		return event;
+	}
+
+	// Chapter 14 - More stuff added below here, mainly a way to save, and load files (serialization used)
+
+	// serializing here
+	private void saveFile (File file) {
+			boolean[] checkboxState = new boolean[256]; // make a boolean array to hold the state 
+
+			for (int i = 0; i < 256; i++) {
+				JCheckBox check = (JCheckBox) checkboxList.get(i);
+				if (check.isSelected()) {
+					checkboxState[i] = true;
+				}
+			}
+			try {
+				FileOutputStream fileStream = new FileOutputStream(new File("save.ser"));
+				ObjectOutputStream os = new ObjectOutputStream(fileStream);
+				os.writeObject(checkboxState);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+	}
+
+	// deserializing here
+	private void loadFile(File file) {
+			boolean[] checkboxState = null;
+			try {
+				FileInputStream fileIn = new FileInputStream(new File("save.ser"));
+				ObjectInputStream is = new ObjectInputStream(fileIn);
+				checkboxState = (boolean[]) is.readObject();
+				// read the single object, in the file and cast it back to a boolean array
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			for (int i = 0; i < 256; i++) {
+				JCheckBox check = (JCheckBox) checkboxList.get(i);
+				if (checkboxState[i]) {
+					check.setSelected(true);
+				} else {
+					check.setSelected(false);
+				}
+			}
+			sequencer.stop();
+			buildTrackAndStart();
+			// stop whatever is currently playing, and rebuild the sequence using the new state of the checkboxes
+			// in the ArrayList
+	}
+
+
+	public class OpenMenuListener implements ActionListener {
+		public void actionPerformed(ActionEvent a) {
+			JFileChooser fileOpen = new JFileChooser();
+			fileOpen.showOpenDialog(theFrame);
+			loadFile(fileOpen.getSelectedFile());
+		}
+	}
+
+	public class SaveMenuListener implements ActionListener {
+		public void actionPerformed(ActionEvent a) {
+			JFileChooser fileSave = new JFileChooser();
+			fileSave.showSaveDialog(theFrame);
+			saveFile(fileSave.getSelectedFile());
+		}
 	}
 } // close class!
