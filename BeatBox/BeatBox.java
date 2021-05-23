@@ -266,7 +266,7 @@ public class BeatBox {
 			// in the ArrayList
 	}
 
-
+	// here is the listener for loading - relays back to the loadFile function
 	public class OpenMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			JFileChooser fileOpen = new JFileChooser();
@@ -275,6 +275,7 @@ public class BeatBox {
 		}
 	}
 
+	// listener for saving, relays back to saveFile Fuction above
 	public class SaveMenuListener implements ActionListener {
 		public void actionPerformed(ActionEvent a) {
 			JFileChooser fileSave = new JFileChooser();
